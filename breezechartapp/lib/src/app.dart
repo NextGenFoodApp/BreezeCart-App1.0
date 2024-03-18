@@ -1,6 +1,8 @@
-import 'package:breezechartapp/src/navigator_keys.dart';
-
+import 'package:breezechartapp/src/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:breezechartapp/src/navigator_keys.dart';
+import 'package:breezechartapp/src/screens/home_page.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -91,7 +93,9 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  _getPageRoutes(BuildContext context, RouteSettings routeSettings) { //global routes
+  _getPageRoutes(BuildContext context, RouteSettings routeSettings) {
+    //global routes
+    print('routeSettings.name: ${routeSettings.name}');
     switch (routeSettings.name) {
       case SettingsView.routeName:
         return SettingsView(controller: settingsController);
@@ -99,9 +103,14 @@ class MyApp extends StatelessWidget {
         return const SampleItemDetailsView();
       case SampleItemListView.routeName:
       case '/home':
-        // return const HomePage();
+        return const HomePage();
+      // case '/login':
+      //   return const LoginPage();
+      // case '/welcome':
+      //   return const WelcomePage();
       default:
-        return const SampleItemListView();
+        // return const SampleItemListView();
+        return const SplashScreenPage();
     }
   }
 
