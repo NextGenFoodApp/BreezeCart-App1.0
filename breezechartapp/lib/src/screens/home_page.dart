@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../screens/shop/shop_page.dart';
+import 'package:breezechartapp/src/screens/shop/shop_page.dart';
+import 'package:breezechartapp/src/screens/shop/shops_page.dart'; // Import the shops_page.dart file
+import 'package:breezechartapp/src/screens/my_cart.dart';
+import 'package:breezechartapp/src/screens/catergory/catergory_page.dart';
+import 'package:breezechartapp/src/screens/auth/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,6 +34,7 @@ class _HomePageState extends State<HomePage> {
           shops =
               List<Map<String, dynamic>>.from(jsonDecode(shopsResponse.body));
         });
+        print('Shops: $shops');
       } else {
         print('Failed to load shops');
       }
@@ -55,6 +60,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('BreezeCart'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Define what happens when the cart icon is pressed
+              // For example, navigate to the cart screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        CartPage()), // Replace with your cart screen widget
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -178,7 +198,13 @@ class _HomePageState extends State<HomePage> {
                     children: categories.map<Widget>((category) {
                       return ElevatedButton(
                         onPressed: () {
-                          // Handle category tap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CategoryPage(
+                                  categoryId: category['category_id']),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey[200],
@@ -220,13 +246,28 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
+              // Navigate to Home page (current page)
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+
               break;
             case 1:
-              Navigator.pushNamed(context, '/shops');
+              // Navigate to Shops page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ShopsPage(), // Use ShopsPage here
+                ),
+              );
               break;
             case 2:
-              Navigator.pushNamed(context, '/myaccount');
+              // Navigate to My Account page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ),
+              );
               break;
           }
         },

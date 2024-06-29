@@ -5,6 +5,7 @@ import 'package:breezechartapp/src/screens/home_page.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -15,10 +16,12 @@ import 'settings/settings_view.dart';
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.settingsController,
+    required this.settingsController, 
+    required this.sharedPreferences,
   });
 
   final SettingsController settingsController;
+  final SharedPreferences sharedPreferences;
 
   @override
   Widget build(BuildContext context) {

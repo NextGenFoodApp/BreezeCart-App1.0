@@ -133,7 +133,7 @@ class _ShopPageState extends State<ShopPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                ProductPage(productId: product['product_id']),
+                                ProductPage(productId: product['product_id'], shopId: product['shop_id'],),
                           ),
                         );
                       },
